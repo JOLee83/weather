@@ -9,7 +9,18 @@ class WheatherUpdate {
     this.parent.appendChild(newH)
   }
 }
-
+class WeatherAPI {
+  constructor(json) {
+    this.json = json
+  }
+  iHaveTwoClasses (json) {
+    const weatherUpdate = new WheatherUpdate('.update')
+    weatherUpdate.updateWeather("Temp(F): ", Math.floor(json.main.temp), "°")
+    weatherUpdate.updateWeather("High(F): ", Math.floor(json.main.temp_max), "°")
+    weatherUpdate.updateWeather("Low(F): ", Math.floor(json.main.temp_min), "°")
+    weatherUpdate.updateWeather("Humidity: ", json.main.humidity, "%")
+  }
+}
 const main = () => {
   let goTo = document.querySelector('.search')
   
@@ -17,22 +28,19 @@ const main = () => {
     let whereFrom = document.querySelector('.where')
     let whereFromValue = whereFrom.value
     let url
-      if (isNaN(parseInt(whereFromValue))) {
-        url = ('http://api.openweathermap.org/data/2.5/weather?q=' + `${whereFromValue}` + '&units=imperial&appid=b1e7918a1ab5e32426948269440f8781')
+    if (isNaN(parseInt(whereFromValue))) {
+        url = ('http://api.openweathermap.org/data/2.5/weather?q=' + `${whereFromValue}` + '&units=imperial&appid=ef452a943151cfcf6ac26be846527b09')
         } else {
-        url = ('http://api.openweathermap.org/data/2.5/weather?zip=' + `${whereFromValue}` + '&units=imperial&appid=b1e7918a1ab5e32426948269440f8781')
-      }
+          url = ('http://api.openweathermap.org/data/2.5/weather?zip=' + `${whereFromValue}` + '&units=imperial&appid=ef452a943151cfcf6ac26be846527b09')
+    }
    fetch(url)
       .then(response => {
         return response.json()
       })
       .then(json => {
         weather.textContent = ''
-        const weatherUpdate = new WheatherUpdate('.update')
-        weatherUpdate.updateWeather("Temp(F): ", Math.floor(json.main.temp), "°")
-        weatherUpdate.updateWeather("High(F): ", Math.floor(json.main.temp_max), "°")
-        weatherUpdate.updateWeather("Low(F): ", Math.floor(json.main.temp_min), "°")
-        weatherUpdate.updateWeather("Humidity: ", json.main.humidity, "%")
+        let weatherAPI = new WeatherAPI(json)
+          weatherAPI.iHaveTwoClasses(json)
       })
     })   
 }
