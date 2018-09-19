@@ -25,9 +25,10 @@ const displayHumidity = humidity => {
 }
 const main = () => {
   let goTo = document.querySelector('.search')
-  let whereFrom = document.querySelector('.where')
-  let whereFromValue = whereFrom.value
+  
   goTo.addEventListener('click', event => {
+    let whereFrom = document.querySelector('.where')
+    let whereFromValue = whereFrom.value
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + `${whereFromValue}` + '&units=imperial&appid=ef452a943151cfcf6ac26be846527b09')
       .then(response => {
         return response.json()

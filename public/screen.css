@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
 html {
   height: 100%;
 }
@@ -15,17 +16,29 @@ body {
   flex-direction: column;
   align-items: center;
   color:darkblue;
-  text-shadow: -1px 0 black, 1px 0 black, 1px 0 black, -1px 0 black; 
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Shadows Into Light', cursive;
 }
 section {
   display: flex;
   justify-content: flex-start;
   width: 200px;
   text-align:left;
+  padding: 0;
 }
 h2 {
   margin-right: 5px;
+}
+button {
+  border-radius: 50%;
+  color:white;
+  background-color: blue;
+  border-color: lightblue darkblue darkblue lightblue;
+}
+input {
+  border-radius: 10px;
+  padding: 4px;
+  border-color: darkblue lightblue lightblue darkblue;
+  color: darkblue
 }
 .sun {
   width:200px;
@@ -33,12 +46,34 @@ h2 {
 }
 @keyframes move {
   0% {
-    margin-left: -230%;
+    margin-left: -200%;
     transform: rotate(0deg);
   }
   100% {
-    margin-right: -230%;
+    margin-right: -200%;
     transform: rotate(180deg);
-
+  }
+}
+.cloud {
+  display:none;
+}
+@media (min-width: 400px) {
+  .cloud {
+    width: 150px;
+    display: inline;
+    animation: bobble 3s infinite alternate;
+  }
+  @keyframes bobble {
+    0% {
+      margin-top: -10%;
+      transform: rotate(-10deg);
+    }
+    100% {
+      margin-bottom: -50px;
+      transform: rotate(10deg);
+    } 
+  }
+  h2 {
+    font-size: 2rem;
   }
 }
